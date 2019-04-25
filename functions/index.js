@@ -377,8 +377,10 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
       axios
         .post(apiUrl, body, { headers: headers })
         .then(response => {
+          agent.add(`Here's the result parts`);
           let parts = response.data.parts;
           let part = parts[0];
+          console.log(part);
           
           agent.add(`${part.partName} - $ ${part.price.list}: ${part.partsTechCatalogURL}`);
 
