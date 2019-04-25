@@ -68,9 +68,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
   function optOutQuerySelection(agent){
     agent.add(`Let's move on.`);
-    agent.add(`Do you want to find your car model or find parts ?`);
-    agent.add(new Suggestion(`Search Car Model`));
-    agent.add(new Suggestion(`Find Parts`));
+    agent.add(`Do you want to find your car model or quote parts ?`);
+    // agent.add(new Suggestion(`Search Car Model`));
+    // agent.add(new Suggestion(`Find Parts`));
 
     const query = agent.parameters.query;
     agent.context.set({
@@ -85,9 +85,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   function optInQuerySelection(agent){
     let email = agent.parameters.email;
     agent.add(`We've sent a discount to ${email}. Thank you!`)
-    agent.add(`Now, Do you want to find your car model or find parts ?`);
-    agent.add(new Suggestion(`Search Car Model`));
-    agent.add(new Suggestion(`Find Parts`));
+    agent.add(`Now, Do you want to find your car model or quote parts ?`);
+    //agent.add(new Suggestion(`Search Car Model`));
+    //agent.add(new Suggestion(`Find Parts`));
 
     const query = agent.parameters.query;
     agent.context.set({
@@ -123,7 +123,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   function searchSelection(agent){
     let query = agent.context.get('query').parameters.query;
     const year = agent.parameters.year;
-    if(query === 'car'){
+    //if(query === 'car'){
       agent.add(`We'll search for your car model starting by the year. Which year is it?`);
 
       agent.context.set({
@@ -134,21 +134,21 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
         }
       });
 
-    } else {
-      agent.add(`Type you car year, make & model.`);
+    // } else {
+    //   agent.add(`Type you car year, make & model.`);
 
-      const make = agent.parameters.make;
-      const model = agent.parameters.model;
-      agent.context.set({
-        name: 'parts',
-        lifespan: 2,
-        parameters: {
-          year: year,
-          make: make,
-          model: model
-        }
-      });
-    }
+    //   const make = agent.parameters.make;
+    //   const model = agent.parameters.model;
+    //   agent.context.set({
+    //     name: 'parts',
+    //     lifespan: 2,
+    //     parameters: {
+    //       year: year,
+    //       make: make,
+    //       model: model
+    //     }
+    //   });
+    // }
   }
 
   function searchMakes(agent) {
@@ -356,6 +356,8 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     const submodelId = agent.context.get('submodel').parameters.submodelId;
     const engine = agent.context.get('engine').parameters;
 
+    const parts = agent.parameters.parts;
+
     const apiUrl = `${host}/catalog/quote`;
     const body = {
       "searchParams": {
@@ -367,7 +369,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
           "engineId": engine.engineId,
           "engineParams": engine.engineParams,
         },
-        "keyword": agent.parameters.parts,
+        "keyword": parts,
       },
       "storeId": 1,
       "filters": []
@@ -376,31 +378,29 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
     return new Promise((resolve, reject) => {
       axios
         .post(apiUrl, body, { headers: headers })
-        .then(response => {
-          agent.add(`Here's the result parts`);
-          let parts = response.data.parts;
-          let part = parts[0];
-          console.log(part);
-          
+        .then(response => response.data.parts)
+        .then(parts => {
+          agent.context.set({
+            name: 'parts',
+            lifespan: 5,
+            parameters: {
+              parts: parts,
+            }
+          });
+          return parts[0];
+        })
+        .then(part => {
           agent.add(`${part.partName} - $ ${part.price.list}: ${part.partsTechCatalogURL}`);
 
-          // agent.add(new Card({
-          //   title: `${part.partName} - $ ${part.price.list}`,
-          //   imageUrl: 'https://i2.wp.com/www.langem.org/wp-content/uploads/2018/04/placeholder.png?w=480',
-          //   text: part.taxonomy.partTypeDescription,
-          //   buttonText: `Buy now (In Stock ${part.quantity})`,
-          //   buttonUrl: part.partsTechCatalogURL
-          // }));
-          
-          // agent.context.set({
-          //   name: 'parts',
-          //   lifespan: 5,
-          //   parameters: {
-          //     parts: parts,
-          //   }
-          // });
+          agent.add(new Card({
+            title: `${part.partName} - $ ${part.price.list}`,
+            imageUrl: 'https://i2.wp.com/www.langem.org/wp-content/uploads/2018/04/placeholder.png?w=480',
+            text: part.taxonomy.partTypeDescription,
+            buttonText: `Buy now (In Stock ${part.quantity})`,
+            buttonUrl: part.partsTechCatalogURL
+          }));
 
-          return resolve(response);
+          return resolve();
         })
         .catch(err => {
           console.log('Parts Err', err);
