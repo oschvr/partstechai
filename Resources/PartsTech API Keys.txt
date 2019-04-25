@@ -1,0 +1,11 @@
+
+id: beta_bosch
+key: 4700fc1c26dd4e54ab26a0bc1c9dd40d
+
+
+team: PartsTech AI 
+user id: hackteam_3   
+pass: hack2019
+email: hack2019+3@partstech.com   
+shopname: Hackathon Team 3
+key: 41482aacb28c49959394b6f6fd66c93d

@@ -1,0 +1,3935 @@
+{
+	"info": {
+		"_postman_id": "6e54a4fd-0cba-47b3-951a-b3259cf13f59",
+		"name": "PT API (ver. 2.019)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth by User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f46bc9a6-a1dd-45da-ba87-fb6bdcd09dcf",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"access_token\", pm.response.json().accessToken);",
+									"    pm.globals.set(\"refresh_token\", pm.response.json().refreshToken);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accessType\": \"user\",\n  \"credentials\": {\n    \"user\": {\n      \"id\": \"demo_helen\",\n      \"key\": \"e2a5497a74104c7facfc31c682b4db62\"\n    },\n    \"partner\": {\n      \"id\": \"test_partner\",\n      \"key\": \"97687715735f4b7da49d39bc19d0e532\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/oauth/access",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth by User Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f46bc9a6-a1dd-45da-ba87-fb6bdcd09dcf",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"access_token\", pm.response.json().accessToken);",
+									"    pm.globals.set(\"refresh_token\", pm.response.json().refreshToken);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accessType\": \"user\",\n  \"credentials\": {\n    \"user\": {\n      \"id\": \"Mechanic28\",\n      \"key\": \"da170e2b7f414b249753d34061d8b338\"\n    },\n    \"partner\": {\n      \"id\": \"beta_bosch\",\n      \"key\": \"4700fc1c26dd4e54ab26a0bc1c9dd40d\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/oauth/access",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"access"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserRefresh",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d22cf9e2-9aca-4f43-86de-e54759777c7e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a8f60c2-2bb8-4209-b7bd-8c69fbe7b5b0",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"access_token\", pm.response.json().accessToken);",
+									"    pm.globals.set(\"refresh_token\", pm.response.json().refreshToken);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/oauth/refresh",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth By Partner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8527eba-9734-4cf9-a77f-ff742077f560",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"access_token\", pm.response.json().accessToken);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"accessType\": \"partner\",\n  \"credentials\": {\n    \"partner\": {\n      \"id\": \"test_partner\",\n      \"key\": \"97687715735f4b7da49d39bc19d0e532\"\n    }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/oauth/access",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"oauth",
+								"access"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Search: PartNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d6a2e757-58af-43a1-bf32-fed40a7aa415",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"partNumber\": [\"331\"]\n  },\n  \"filters\": [\n    {\n      \"name\": \"parts\",\n      \"values\": [1688, 2172]\n    },\n    {\n      \"name\": \"WarrantyTime\",\n      \"values\": [\"24 Months\"]\n    },\n    {\n      \"name\": \"manufacturers\",\n      \"values\": [336]\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Vehicle + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1211941a-fdfe-4691-b1c1-16350f252650",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"keyword\": \"Air Filter\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Vin + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0ffc63a7-6ccf-4e82-a8ba-ee8af6ef9aa8",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"keyword\": \"Brake Pad\"\n  },\n  \"filters\": [\n    {\n      \"name\": \"Drivetype\",\n      \"values\": [\"Not Specified\"]\n    },\n    {\n      \"name\": \"Remanufactured\",\n      \"values\": [1]\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Vehicle + PartTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3f50ce4f-4b5c-4397-8f00-6eab0f9889c5",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineId\": 177,\n      \"engineParams\": {\n        \"engineVinId\": 1,\n        \"engineDesignationId\": 589,\n        \"engineVersionId\": 3,\n        \"fuelTypeId\": 5,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"partTypeIds\": [5132, 10328]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Vin + PartTypes ",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "34709119-095a-4802-a920-94afac0c2983",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"partTypeIds\": [1912, 14002, 1704]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Plate + PartTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "34709119-095a-4802-a920-94afac0c2983",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"partTypeIds\": [1912, 14002, 1704]\n  },\n  \"filters\": [\n    {\n      \"name\": \"Drivetype\",\n      \"values\": [\"Not Specified\"]\n    },\n    {\n      \"name\": \"Remanufactured\",\n      \"values\": [1]\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search: Plate + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "34709119-095a-4802-a920-94afac0c2983",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"keyword\": \"Brake Pad\"\n  },\n  \"filters\": [\n    {\n      \"name\": \"Drivetype\",\n      \"values\": [\"Not Specified\"]\n    },\n    {\n      \"name\": \"Remanufactured\",\n      \"values\": [1]\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/search",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"search"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Quote",
+					"item": [
+						{
+							"name": "VIN + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0cfba697-0a8b-4dbc-8f74-a21a1bd05356",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"keyword\": \"Brake Pad\"\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VIN + PartTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c98cee15-c769-4390-8eac-8a9c11ddc64a",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"partTypeIds\": [1912, 14002, 1704]\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Vehicle + PartTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "04910d44-4bbb-450b-8d7b-f6ce56bf89cf",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineId\": 177,\n      \"engineParams\": {\n        \"engineVinId\": 1,\n        \"engineDesignationId\": 589,\n        \"engineVersionId\": 3,\n        \"fuelTypeId\": 5,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"partTypeIds\": [5132, 10328]\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Vehicle + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "bb1bd11a-e454-4a2f-aaa7-ce80aac10abd",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"keyword\": \"Air Filter\"\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plate + Keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b52a5d2c-33ed-4c9e-b482-fe31371ddd09",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"keyword\": \"Brake Pad\"\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Plate + PartTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b0b268b0-ec9c-462f-b387-d91fbb27fffa",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"partTypeIds\": [5132, 10328]\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PartNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b0b268b0-ec9c-462f-b387-d91fbb27fffa",
+										"exec": [
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});",
+											"if (pm.response.to.have.status(200)) {",
+											"    console.log(\"Part Count: \" + pm.response.json().parts.length);",
+											"    console.log(\"Filter Count: \" + pm.response.json().filters.length);",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"partNumber\": [\"331\"]\n  },\n  \"storeId\": 1,\n  \"filters\": []\n}"
+								},
+								"url": {
+									"raw": "{{host}}/catalog/quote",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Brands",
+					"item": [
+						{
+							"name": "BrandList",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/catalog/brands",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"brands"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/catalog/brands/BBCM",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"brands",
+										"BBCM"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Parts",
+					"item": [
+						{
+							"name": "Single: Part",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/catalog/parts/BBSC-18042",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"parts",
+										"BBSC-18042"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "PlateVIN",
+					"item": [
+						{
+							"name": "PlateVin: VIN",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/catalog/vin/1FMZU74E2YZA89633",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"vin",
+										"1FMZU74E2YZA89633"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PlateVin: Plate",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/catalog/plate/LA/X621167",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"catalog",
+										"plate",
+										"LA",
+										"X621167"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "890a88ca-b763-48d0-96b1-fbcb1d3c00e9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "050f1b5f-bafd-460f-b434-ce7d1f07db65",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Get User Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/profile",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/reset-password",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reset-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Shop",
+					"item": [
+						{
+							"name": "Get User Shop",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Shop Shipping Address",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"address1\": \"777 Boston Road\",\n  \"city\": \"SPRINGFIELD\",\n  \"state\": \"MA\",\n  \"zipCode\": \"01119-1341\",\n  \"country\": \"US\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/shipping-address",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"shipping-address"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Shop Billing Address",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"address1\": \"6200 Hermann Park Dr\",\n  \"city\": \"HOUSTON\",\n  \"state\": \"TX\",\n  \"zipCode\": \"77030-1710\",\n  \"country\": \"US\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/billing-address",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"billing-address"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User Shop",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"pickUpRadius\": 15\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Supplier Preferences",
+					"item": [
+						{
+							"name": "Get Preferences",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Preference (MD)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"supplierId\": 15021,\n  \"storeId\": 685,\n  \"priority\": 1\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Preference (AutoZone)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"supplierId\": 2501,\n  \"storeId\": 30,\n  \"priority\": 1,\n  \"credentials\": [\n    {\"name\": \"customerNumber\", \"value\": \"920441\"}\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Preference (Advance)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"supplierId\": 1458,\n  \"priority\": 1,\n  \"credentials\": [\n    {\"name\": \"customer\", \"value\": null},\n    {\"name\": \"username\", \"value\": null},\n    {\"name\": \"password\", \"value\": null}\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Preference (Advance)",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"priority\": 1,\n  \"credentials\": [\n    {\"name\": \"customer\", \"value\": \"431708\"},\n    {\"name\": \"username\", \"value\": \"431708\"},\n    {\"name\": \"password\", \"value\": \"WqYze9wH\"}\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers/23017",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers",
+										"23017"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Preference (AutoZone)",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"storeId\": 705,\n  \"priority\": 1,\n  \"credentials\": [\n    {\"name\": \"customerNumber\", \"value\": \"920441\"}\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers/23016",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers",
+										"23016"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Preference",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/profile/shop/suppliers/22907",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"profile",
+										"shop",
+										"suppliers",
+										"22907"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Punchout - Cart",
+			"item": [
+				{
+					"name": "Add Part",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ef70b7a-ea40-4857-9821-e027861c8c6d",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\",\n  \"requestedPart\": {\n    \"storeId\": 70,\n    \"partId\": \"BBNF-5308\",\n    \"lineCardId\": 12568,\n    \"vehicleId\": 255300\n  }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/add-part",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"add-part"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Availability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a07524fd-fc56-49d6-803b-149ac867ed2e",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/availability",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "26947504-a6a3-426e-9ed7-13c70a525a60",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/submit",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "023874ab-e873-4770-965f-339b0146ba8b",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\",\n  \"updates\": [\n    {\n      \"orderItemId\": \"6143f95842a544d6b513416f0feae0dc\",\n      \"quantity\": 3\n    },\n    {\n      \"orderItemId\": \"7026dbdd82ad416d8e34fdd0d6c4e699\",\n      \"quantity\": 4\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Parts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bcd3bc98-9fc8-40f1-8851-357fe3affa4f",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\",\n  \"removals\": [\n    \"7026dbdd82ad416d8e34fdd0d6c4e699\"\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/remove-parts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"remove-parts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "98484c4c-3a85-432f-a8b7-dd088234c67e",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"{{punchout_session}}\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/info",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c430cc3-5725-4f9a-ace6-bc7c62070da3",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"orders\": [\n    {\n      \"storeId\": 36,\n      \"poNumber\": \"test po number\",\n      \"notes\": \"test notes\",\n      \"parts\": [\n        {\n          \"partId\": \"FLHQ-LX 3024\",\n          \"quantity\": 1,\n          \"lineCardId\": 5310,\n          \"vehicleId\": 287296\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/cart/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"cart",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Punchout - Quote",
+			"item": [
+				{
+					"name": "Create",
+					"item": [
+						{
+							"name": "QuoteCreate: partNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"partNumber\": [\"331\"]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vehicle only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vehicle + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"partTypeIds\": [5132, 10328]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vehicle + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"keyword\": \"Air Filter\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vin only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vin + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"partTypeIds\": [1912, 14002, 1704]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: vin + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"keyword\": \"Brake Pad\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: plate only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: plate + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"partTypeIds\": [5132, 10328]\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteCreate: plate + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"keyword\": \"Brake Pad\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Update",
+					"item": [
+						{
+							"name": "QuoteUpdate: plate + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"keyword\": \"Brake Pad\"\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: plate + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    },\n    \"partTypeIds\": [5132, 10328]\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: plate only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"plate\": {\n      \"plate\": \"X621167\",\n      \"state\": \"LA\"\n    }\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vin + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"keyword\": \"Brake Pad\"\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vin + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\",\n    \"partTypeIds\": [1912, 14002, 1704]\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vin only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\"\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vehicle + keyword",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"keyword\": \"Air Filter\"\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vehicle + partTypes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    },\n    \"partTypeIds\": [5132, 10328]\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: vehicle only",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2014,\n      \"makeId\": 21,\n      \"modelId\": 104,\n      \"subModelId\": 3512,\n      \"engineId\": 2062,\n      \"engineParams\": {\n        \"engineVinId\": 31,\n        \"engineDesignationId\": 1,\n        \"engineVersionId\": 73,\n        \"fuelTypeId\": 14,\n        \"cylinderHeadTypeId\": 6\n      }\n    }\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "QuoteUpdate: partNumber",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+										"exec": [
+											"if (pm.response.to.have.status(200)) {",
+											"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+											"}",
+											"",
+											"pm.test(\"response must be valid and have a body\", function () {",
+											"     // assert that the status code is 200",
+											"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+											"     // assert that the response has a valid JSON body",
+											"     pm.response.to.be.withBody;",
+											"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"searchParams\": {\n    \"partNumber\": [\"331\"]\n  },\n  \"sessionId\": \"15a76d9343f047409b6bb8c8a60f03e6\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/punchout/quote/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"punchout",
+										"quote",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sessionId\":\"1c862fc089eb49db869bf6bd1c9de576\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/quote/info",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"quote",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stock Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a2404ebe-b92c-494d-8b51-42a0e896873f",
+								"exec": [
+									"if (pm.response.to.have.status(200)) {",
+									"    pm.globals.set(\"punchout_session\", pm.response.json().sessionId);",
+									"}",
+									"",
+									"pm.test(\"response must be valid and have a body\", function () {",
+									"     // assert that the status code is 200",
+									"     pm.response.to.be.ok; // info, success, redirection, clientError,  serverError, are other variants",
+									"     // assert that the response has a valid JSON body",
+									"     pm.response.to.be.withBody;",
+									"     pm.response.to.be.json; // this assertion also checks if a body  exists, so the above check is not needed",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parts\": [\n    {\"partNumber\": \"E2530M\"},\n    {\"partNumber\": \"E2541M\", \"partId\": \"FXNK-E2541M\"},\n    {\"partNumber\": \"E2545M\", \"partId\": \"FXNK-E2545M\", \"quantity\": 3}\n  ],\n  \"storeId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{host}}/punchout/quote/stock-order",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"punchout",
+								"quote",
+								"stock-order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Taxonomy",
+			"item": [
+				{
+					"name": "Labor",
+					"item": [
+						{
+							"name": "Taxonomy",
+							"item": [
+								{
+									"name": "Labor: Taxonomy: Vehicle By EngineConfig",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineConfigId\": 7310\n    }\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Labor: Taxonomy: Vin",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\"\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Labor: Taxonomy: Vehicle",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineId\": 177,\n      \"engineParams\": {\n        \"engineVinId\": 1,\n        \"engineDesignationId\": 589,\n        \"engineVersionId\": 3,\n        \"fuelTypeId\": 5,\n        \"cylinderHeadTypeId\": 6\n      }\n    }\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Summary",
+							"item": [
+								{
+									"name": "Labor: Summary: Vehicle",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineId\": 177,\n      \"engineParams\": {\n        \"engineVinId\": 1,\n        \"engineDesignationId\": 589,\n        \"engineVersionId\": 3,\n        \"fuelTypeId\": 5,\n        \"cylinderHeadTypeId\": 6\n      }\n    }\n  },\n  \"laborParams\": {\n    \"systemId\": 7,\n    \"groupId\": 15,\n    \"subGroupIds\": [55, 60]\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Labor: Summary: Vehicle by EngineConfig",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vehicleParams\": {\n      \"yearId\": 2003,\n      \"makeId\": 31,\n      \"modelId\": 173,\n      \"subModelId\": 20,\n      \"engineConfigId\": 7310\n    }\n  },\n  \"laborParams\": {\n    \"systemId\": 7,\n    \"groupId\": 15,\n    \"subGroupIds\": [55, 60]\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Labor: Summary: VIN with Taxonomies",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\"\n  },\n  \"laborParams\": {\n    \"taxonomyIds\": [11268, 11317]\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Labor: Summary: VIN",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"searchParams\": {\n    \"vin\": \"1FMZU74E2YZA89633\"\n  },\n  \"laborParams\": {\n    \"systemId\": 7,\n    \"groupId\": 58,\n    \"subGroupIds\": [67, 99, 199]\n  }\n}"
+										},
+										"url": {
+											"raw": "{{host}}/taxonomy/labor",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"taxonomy",
+												"labor"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Vehicle Configuration DB",
+					"item": [
+						{
+							"name": "years",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/years?make&model",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"years"
+									],
+									"query": [
+										{
+											"key": "make",
+											"value": null
+										},
+										{
+											"key": "model",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "makes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/makes?year=2017&model=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"makes"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2017"
+										},
+										{
+											"key": "model",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "models",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/models?year=2017&make=21&submodel",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"models"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2017"
+										},
+										{
+											"key": "make",
+											"value": "21"
+										},
+										{
+											"key": "submodel",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "submodels",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/submodels?year=2017&make=21&model=105&engine=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"submodels"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2017"
+										},
+										{
+											"key": "make",
+											"value": "21"
+										},
+										{
+											"key": "model",
+											"value": "105"
+										},
+										{
+											"key": "engine",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "engines",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/engines?year=2017&make=21&model=105&submodel=113",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"engines"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2017"
+										},
+										{
+											"key": "make",
+											"value": "21"
+										},
+										{
+											"key": "model",
+											"value": "105"
+										},
+										{
+											"key": "submodel",
+											"value": "113"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vehicles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles?year=2017&make=21&model=105&submodel=113&engine=5486",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2017"
+										},
+										{
+											"key": "make",
+											"value": "21"
+										},
+										{
+											"key": "model",
+											"value": "105"
+										},
+										{
+											"key": "submodel",
+											"value": "113"
+										},
+										{
+											"key": "engine",
+											"value": "5486"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "vehicle",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/vehicles/473536",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"vehicles",
+										"473536"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Product Characteristics DB",
+					"item": [
+						{
+							"name": "categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/categories?name=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "subcategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/subcategories?name=&category=6",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"subcategories"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": ""
+										},
+										{
+											"key": "category",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "part types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/part-types?category=6&subcategory=229&name=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"part-types"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "6"
+										},
+										{
+											"key": "subcategory",
+											"value": "229"
+										},
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "part type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/taxonomy/part-types/58709",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"taxonomy",
+										"part-types",
+										"58709"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Others",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Users search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/users?username=demo_helen&email&lastName",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "demo_helen"
+										},
+										{
+											"key": "email",
+											"value": ""
+										},
+										{
+											"key": "lastName",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/users/demo_helen",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"users",
+										"demo_helen"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Shops",
+					"item": [
+						{
+							"name": "Shops get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/shops/87",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"shops",
+										"87"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Suppliers",
+					"item": [
+						{
+							"name": "Suppliers search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/suppliers?name=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"suppliers"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Suppliers get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/suppliers/1458",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"suppliers",
+										"1458"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stores search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/stores?supplierId=2501&city=&state=&zip=10007&radius=25&name=",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"stores"
+									],
+									"query": [
+										{
+											"key": "supplierId",
+											"value": "2501"
+										},
+										{
+											"key": "city",
+											"value": ""
+										},
+										{
+											"key": "state",
+											"value": ""
+										},
+										{
+											"key": "zip",
+											"value": "10007"
+										},
+										{
+											"key": "radius",
+											"value": "25"
+										},
+										{
+											"key": "name",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stores get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/stores/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"stores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8975fe36-638a-4c56-b71c-7ee462d4347c",
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set('host','https://api.beta.partstech.com')"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e2d34c3c-444e-4ecc-b0e9-be159bd476c3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

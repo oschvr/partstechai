@@ -1,0 +1,19 @@
+Brand:
+Bosch
+
+Part Types:
+Spark plugs
+Alternators
+Oxygen Sensors
+Wiper Blades
+Vehicle Batteries
+Fuel Pumps
+
+Vehicles:
+2010-2015, BMW, 325
+2010-2015, BMW, 328
+2010-2015, Volkswagen, Jetta
+2010-2015, Volkswagen, Passat
+
+Sample search:
+https://beta.partstech.com/searchresult?availability[]=1&data_version[]=actual&part_text=Spark%20Plug&part_text_id=7212&selected_distributor=2501-149371&vehicle=268184
